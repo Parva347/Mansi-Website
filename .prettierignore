@@ -1,0 +1,9 @@
+dist
+node_modules
+coverage
+.npm-cache
+AGENTS.md
+README.md
+assets/
+data/
+docs/
