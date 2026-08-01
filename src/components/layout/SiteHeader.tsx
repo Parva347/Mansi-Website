@@ -1,26 +1,34 @@
 import { NavLink } from 'react-router-dom';
 
 import { publicRoutes } from '../../constants/routes';
+import { Container } from '../ui/Container';
 
 export function SiteHeader() {
   return (
-    <header className="site-header">
-      <div className="site-container site-header__content">
-        <NavLink aria-label="Mansi Industries home" className="site-wordmark" to="/">
+    <header className="border-b border-border">
+      <Container className="flex min-h-18 flex-col justify-center gap-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:py-0">
+        <NavLink
+          aria-label="Mansi Industries home"
+          className="font-display text-lg no-underline"
+          to="/"
+        >
           Mansi Industries
         </NavLink>
         <nav aria-label="Primary navigation">
-          <ul className="site-navigation">
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">
             {publicRoutes.map(({ label, path }) => (
               <li key={path || 'home'}>
-                <NavLink className="site-navigation__link" to={`/${path}`}>
+                <NavLink
+                  className="text-xs tracking-[var(--token-letter-spacing-label)] text-ink-muted uppercase no-underline transition-colors duration-[var(--token-duration-fast)] ease-standard hover:text-ink"
+                  to={`/${path}`}
+                >
                   {label}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
-      </div>
+      </Container>
     </header>
   );
 }

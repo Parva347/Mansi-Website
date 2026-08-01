@@ -5,12 +5,12 @@ import { SiteHeader } from '../components/layout/SiteHeader';
 
 export function PublicLayout() {
   return (
-    <div className="site-shell">
+    <div className="flex min-h-dvh flex-col">
       <a className="skip-link" href="#main-content">
         Skip to content
       </a>
       <SiteHeader />
-      <main id="main-content" tabIndex={-1}>
+      <main className="flex-1" id="main-content" tabIndex={-1}>
         <Outlet />
       </main>
       <SiteFooter />
