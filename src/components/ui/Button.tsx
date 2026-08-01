@@ -1,15 +1,19 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
 
 import { classNames } from '../../utils/classNames';
 
 type ButtonSize = 'sm' | 'md' | 'lg';
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SharedButtonProps {
   children: ReactNode;
   size?: ButtonSize;
   variant?: ButtonVariant;
 }
+
+export type ButtonProps =
+  | (SharedButtonProps & ButtonHTMLAttributes<HTMLButtonElement> & { href?: never })
+  | (SharedButtonProps & AnchorHTMLAttributes<HTMLAnchorElement> & { href: string });
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
@@ -26,24 +30,44 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: 'min-h-12 px-6 text-sm tracking-[var(--token-letter-spacing-label)]',
 };
 
-export function Button({
-  children,
-  className,
-  size = 'md',
-  type = 'button',
-  variant = 'primary',
-  ...props
-}: ButtonProps) {
+export function Button(props: ButtonProps) {
+  const { children, className, size = 'md', variant = 'primary' } = props;
+  const classes = classNames(
+    'inline-flex items-center justify-center rounded-none font-sans font-medium uppercase transition-colors duration-[var(--token-duration-standard)] ease-standard disabled:pointer-events-none disabled:opacity-50',
+    sizeClasses[size],
+    variantClasses[variant],
+    className,
+  );
+
+  if ('href' in props && props.href) {
+    const {
+      children: _children,
+      className: _className,
+      href,
+      size: _size,
+      variant: _variant,
+      ...linkProps
+    } = props;
+    return (
+      <a className={classes} href={href} {...linkProps}>
+        {children}
+      </a>
+    );
+  }
+
+  const {
+    children: _children,
+    className: _className,
+    size: _size,
+    type = 'button',
+    variant: _variant,
+    ...buttonProps
+  } = props;
   return (
     <button
-      className={classNames(
-        'inline-flex items-center justify-center rounded-none font-sans font-medium uppercase transition-colors duration-[var(--token-duration-standard)] ease-standard disabled:pointer-events-none disabled:opacity-50',
-        sizeClasses[size],
-        variantClasses[variant],
-        className,
-      )}
-      type={type}
-      {...props}
+      className={classes}
+      type={type as ButtonHTMLAttributes<HTMLButtonElement>['type']}
+      {...(buttonProps as ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {children}
     </button>
