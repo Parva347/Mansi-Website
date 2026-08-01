@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { classNames } from '../../utils/classNames';
 
 type Aspect = 'landscape' | 'portrait' | 'square' | 'wide';
@@ -15,7 +17,7 @@ const aspects: Record<Aspect, string> = {
   wide: 'aspect-[16/9]',
 };
 
-export function ImagePlaceholder({
+export const ImagePlaceholder = memo(function ImagePlaceholder({
   aspect = 'landscape',
   className,
   label,
@@ -30,9 +32,12 @@ export function ImagePlaceholder({
       )}
       role="img"
     >
-      <span className="font-mono text-2xs tracking-[var(--token-letter-spacing-label)] text-ink-subtle uppercase">
+      <span
+        aria-hidden="true"
+        className="font-mono text-2xs tracking-[var(--token-letter-spacing-label)] text-ink-subtle uppercase"
+      >
         Image placeholder
       </span>
     </div>
   );
-}
+});

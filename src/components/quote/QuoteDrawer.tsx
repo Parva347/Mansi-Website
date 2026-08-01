@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 
 import { useQuote } from '../../hooks/useQuote';
 import { openWhatsAppEnquiry, type QuoteCustomerDetails } from '../../services/whatsapp-enquiry';
@@ -27,18 +27,25 @@ const requiredFields: { key: RequiredCustomerField; label: string }[] = [
 
 export function QuoteDrawer() {
   const { clearQuote, closeDrawer, isDrawerOpen, items } = useQuote();
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [customer, setCustomer] = useState<QuoteCustomerDetails>(initialCustomer);
   const [errors, setErrors] = useState<QuoteFormErrors>({});
 
   useEffect(() => {
     if (!isDrawerOpen) return undefined;
 
+    const previouslyFocusedElement = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') closeDrawer();
     };
 
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      previouslyFocusedElement?.focus();
+    };
   }, [closeDrawer, isDrawerOpen]);
 
   if (!isDrawerOpen) return null;
@@ -90,6 +97,7 @@ export function QuoteDrawer() {
             aria-label="Close quote drawer"
             className="grid size-10 place-items-center border border-ink/15 text-xl transition-colors hover:bg-surface-muted"
             onClick={closeDrawer}
+            ref={closeButtonRef}
             type="button"
           >
             ×

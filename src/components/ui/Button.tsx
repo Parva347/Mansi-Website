@@ -7,6 +7,8 @@ type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
 interface SharedButtonProps {
   children: ReactNode;
+  isLoading?: boolean;
+  loadingLabel?: string;
   size?: ButtonSize;
   variant?: ButtonVariant;
 }
@@ -31,7 +33,14 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 export function Button(props: ButtonProps) {
-  const { children, className, size = 'md', variant = 'primary' } = props;
+  const {
+    children,
+    className,
+    isLoading = false,
+    loadingLabel = 'Loading...',
+    size = 'md',
+    variant = 'primary',
+  } = props;
   const classes = classNames(
     'inline-flex items-center justify-center rounded-none font-sans font-medium uppercase transition-colors duration-[var(--token-duration-standard)] ease-standard disabled:pointer-events-none disabled:opacity-50',
     sizeClasses[size],
@@ -44,13 +53,15 @@ export function Button(props: ButtonProps) {
       children: _children,
       className: _className,
       href,
+      isLoading: _isLoading,
+      loadingLabel: _loadingLabel,
       size: _size,
       variant: _variant,
       ...linkProps
     } = props;
     return (
-      <a className={classes} href={href} {...linkProps}>
-        {children}
+      <a aria-busy={isLoading || undefined} className={classes} href={href} {...linkProps}>
+        {isLoading ? loadingLabel : children}
       </a>
     );
   }
@@ -58,6 +69,8 @@ export function Button(props: ButtonProps) {
   const {
     children: _children,
     className: _className,
+    isLoading: _isLoading,
+    loadingLabel: _loadingLabel,
     size: _size,
     type = 'button',
     variant: _variant,
@@ -65,11 +78,13 @@ export function Button(props: ButtonProps) {
   } = props;
   return (
     <button
-      className={classes}
-      type={type as ButtonHTMLAttributes<HTMLButtonElement>['type']}
       {...(buttonProps as ButtonHTMLAttributes<HTMLButtonElement>)}
+      aria-busy={isLoading || undefined}
+      className={classes}
+      disabled={(buttonProps as ButtonHTMLAttributes<HTMLButtonElement>).disabled || isLoading}
+      type={type as ButtonHTMLAttributes<HTMLButtonElement>['type']}
     >
-      {children}
+      {isLoading ? loadingLabel : children}
     </button>
   );
 }

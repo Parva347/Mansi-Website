@@ -21,7 +21,11 @@ export function SiteHeader() {
               {publicRoutes.map(({ label, path }) => (
                 <li key={path || 'home'}>
                   <NavLink
-                    className="text-xs tracking-[var(--token-letter-spacing-label)] text-ink-muted uppercase no-underline transition-colors duration-[var(--token-duration-fast)] ease-standard hover:text-ink"
+                    className={({ isActive }) =>
+                      `text-xs tracking-[var(--token-letter-spacing-label)] uppercase no-underline transition-colors duration-[var(--token-duration-fast)] ease-standard hover:text-ink ${
+                        isActive ? 'text-ink underline underline-offset-4' : 'text-ink-muted'
+                      }`
+                    }
                     to={`/${path}`}
                   >
                     {label}
