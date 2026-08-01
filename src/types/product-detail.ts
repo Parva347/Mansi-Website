@@ -1,6 +1,7 @@
 import type { CataloguePlaceholderProduct } from './catalogue-ui';
 
 export interface ProductDetailInfo {
+  id: string;
   category: string;
   code: string;
   collection: string;

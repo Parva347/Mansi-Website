@@ -1,5 +1,6 @@
 import type { CataloguePlaceholderProduct } from '../../types/catalogue-ui';
 import { ImagePlaceholder } from '../home/ImagePlaceholder';
+import { QuoteButton } from '../quote/QuoteButton';
 import { Button } from '../ui/Button';
 import { Heading } from '../ui/Heading';
 
@@ -17,9 +18,12 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.title}
         </Heading>
         <p className="mt-2 font-mono text-xs tracking-[0.1em] text-ink-muted">{product.code}</p>
-        <Button className="mt-6 self-start" href={`/catalogue/${product.id}`} variant="ghost">
-          View details
-        </Button>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <Button href={`/catalogue/${product.id}`} variant="ghost">
+            View details
+          </Button>
+          <QuoteButton product={{ id: product.id, name: product.title, code: product.code }} />
+        </div>
       </div>
     </article>
   );

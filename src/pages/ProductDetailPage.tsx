@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CallToAction } from '../components/home/CallToAction';
 import { ProductGallery } from '../components/product/ProductGallery';
 import { ProductInfo } from '../components/product/ProductInfo';
+import { QuoteButton } from '../components/quote/QuoteButton';
 import { RelatedProducts } from '../components/product/RelatedProducts';
 import { SpecificationTable } from '../components/product/SpecificationTable';
 import { Container } from '../components/ui/Container';
@@ -35,7 +36,17 @@ export function ProductDetailPage() {
           </nav>
           <div className="mt-10 grid gap-12 lg:mt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16 xl:gap-24">
             <ProductGallery {...productDetailContent.gallery} />
-            <ProductInfo product={productDetailContent.product} />
+            <div>
+              <ProductInfo product={productDetailContent.product} />
+              <QuoteButton
+                className="mt-8"
+                product={{
+                  id: productDetailContent.product.id,
+                  name: productDetailContent.product.title,
+                  code: productDetailContent.product.code,
+                }}
+              />
+            </div>
           </div>
         </Container>
       </Section>

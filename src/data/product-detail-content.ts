@@ -11,6 +11,7 @@ export const productDetailContent: ProductDetailContent = {
     ],
   },
   product: {
+    id: 'product-detail-placeholder',
     title: 'Product Name Placeholder',
     code: 'Product code placeholder',
     collection: 'Collection placeholder',

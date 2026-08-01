@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 import { publicRoutes } from '../../constants/routes';
 import { Container } from '../ui/Container';
+import { QuoteButton } from '../quote/QuoteButton';
 
 export function SiteHeader() {
   return (
@@ -14,20 +15,23 @@ export function SiteHeader() {
         >
           Mansi Industries
         </NavLink>
-        <nav aria-label="Primary navigation">
-          <ul className="flex flex-wrap gap-x-4 gap-y-2">
-            {publicRoutes.map(({ label, path }) => (
-              <li key={path || 'home'}>
-                <NavLink
-                  className="text-xs tracking-[var(--token-letter-spacing-label)] text-ink-muted uppercase no-underline transition-colors duration-[var(--token-duration-fast)] ease-standard hover:text-ink"
-                  to={`/${path}`}
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex flex-wrap items-center gap-4">
+          <nav aria-label="Primary navigation">
+            <ul className="flex flex-wrap gap-x-4 gap-y-2">
+              {publicRoutes.map(({ label, path }) => (
+                <li key={path || 'home'}>
+                  <NavLink
+                    className="text-xs tracking-[var(--token-letter-spacing-label)] text-ink-muted uppercase no-underline transition-colors duration-[var(--token-duration-fast)] ease-standard hover:text-ink"
+                    to={`/${path}`}
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <QuoteButton />
+        </div>
       </Container>
     </header>
   );

@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { SiteFooter } from '../components/layout/SiteFooter';
 import { SiteHeader } from '../components/layout/SiteHeader';
+import { QuoteDrawer } from '../components/quote/QuoteDrawer';
 
 export function PublicLayout() {
   return (
@@ -14,6 +15,7 @@ export function PublicLayout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <QuoteDrawer />
     </div>
   );
 }
