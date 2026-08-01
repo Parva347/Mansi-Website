@@ -1,4 +1,5 @@
 export interface CataloguePlaceholderProduct {
+  id: string;
   title: string;
   code: string;
   category: string;

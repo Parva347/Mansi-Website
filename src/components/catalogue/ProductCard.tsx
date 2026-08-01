@@ -17,7 +17,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.title}
         </Heading>
         <p className="mt-2 font-mono text-xs tracking-[0.1em] text-ink-muted">{product.code}</p>
-        <Button className="mt-6 self-start" variant="ghost" disabled>
+        <Button className="mt-6 self-start" href={`/catalogue/${product.id}`} variant="ghost">
           View details
         </Button>
       </div>

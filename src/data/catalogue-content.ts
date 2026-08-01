@@ -4,12 +4,12 @@ import type {
 } from '../types/catalogue-ui'
 
 const products: CataloguePlaceholderProduct[] = [
-  { title: 'Product Placeholder A', code: 'CODE-PLACEHOLDER-A', category: 'Category Placeholder A', imageLabel: 'Product placeholder A image' },
-  { title: 'Product Placeholder B', code: 'CODE-PLACEHOLDER-B', category: 'Category Placeholder B', imageLabel: 'Product placeholder B image' },
-  { title: 'Product Placeholder C', code: 'CODE-PLACEHOLDER-C', category: 'Category Placeholder C', imageLabel: 'Product placeholder C image' },
-  { title: 'Product Placeholder D', code: 'CODE-PLACEHOLDER-D', category: 'Category Placeholder D', imageLabel: 'Product placeholder D image' },
-  { title: 'Product Placeholder E', code: 'CODE-PLACEHOLDER-E', category: 'Category Placeholder E', imageLabel: 'Product placeholder E image' },
-  { title: 'Product Placeholder F', code: 'CODE-PLACEHOLDER-F', category: 'Category Placeholder F', imageLabel: 'Product placeholder F image' },
+  { id: 'product-placeholder-a', title: 'Product Placeholder A', code: 'CODE-PLACEHOLDER-A', category: 'Category Placeholder A', imageLabel: 'Product placeholder A image' },
+  { id: 'product-placeholder-b', title: 'Product Placeholder B', code: 'CODE-PLACEHOLDER-B', category: 'Category Placeholder B', imageLabel: 'Product placeholder B image' },
+  { id: 'product-placeholder-c', title: 'Product Placeholder C', code: 'CODE-PLACEHOLDER-C', category: 'Category Placeholder C', imageLabel: 'Product placeholder C image' },
+  { id: 'product-placeholder-d', title: 'Product Placeholder D', code: 'CODE-PLACEHOLDER-D', category: 'Category Placeholder D', imageLabel: 'Product placeholder D image' },
+  { id: 'product-placeholder-e', title: 'Product Placeholder E', code: 'CODE-PLACEHOLDER-E', category: 'Category Placeholder E', imageLabel: 'Product placeholder E image' },
+  { id: 'product-placeholder-f', title: 'Product Placeholder F', code: 'CODE-PLACEHOLDER-F', category: 'Category Placeholder F', imageLabel: 'Product placeholder F image' },
 ]
 
 const toolbar: CatalogueToolbarContent = {
