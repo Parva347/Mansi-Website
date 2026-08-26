@@ -1,26 +1,27 @@
+import type { ProductImage } from '../../types/catalogue';
 import { ImagePlaceholder } from '../home/ImagePlaceholder';
 
 interface ProductGalleryProps {
-  primaryImageLabel: string;
-  thumbnailImageLabels: string[];
+  image?: ProductImage;
+  label: string;
 }
 
-export function ProductGallery({ primaryImageLabel, thumbnailImageLabels }: ProductGalleryProps) {
+export function ProductGallery({ image, label }: ProductGalleryProps) {
   return (
     <section aria-label="Product gallery">
       <figure>
-        <ImagePlaceholder aspect="portrait" label={primaryImageLabel} />
-        <figcaption className="mt-3 font-mono text-2xs tracking-[var(--token-letter-spacing-label)] text-ink-subtle uppercase">
-          Primary image placeholder
-        </figcaption>
+        {image ? (
+          <img
+            alt={image.alt}
+            className="aspect-[4/5] w-full border border-border object-cover"
+            height={image.height}
+            src={image.src}
+            width={image.width}
+          />
+        ) : (
+          <ImagePlaceholder aspect="portrait" label={`${label} image`} />
+        )}
       </figure>
-      <ul className="mt-5 grid grid-cols-4 gap-3" aria-label="Product thumbnails">
-        {thumbnailImageLabels.map((label) => (
-          <li key={label}>
-            <ImagePlaceholder aspect="square" label={label} />
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }
